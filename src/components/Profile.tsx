@@ -1,6 +1,7 @@
 import {
   Container,
   Flex,
+  FlexProps,
   Heading,
   Image,
   Text,
@@ -9,7 +10,7 @@ import {
 import { ReactElement } from "react";
 
 function Profile(): ReactElement {
-  const flexBreakPoint = useBreakpointValue({
+  const flexBreakPoint = useBreakpointValue<FlexProps["direction"]>({
     base: "row",
     md: "column",
     sm: "column",
