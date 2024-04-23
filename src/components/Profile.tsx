@@ -8,6 +8,7 @@ import {
   useBreakpointValue,
 } from "@yamada-ui/react";
 import { ReactElement } from "react";
+import MyPicture from "@kametsun/assets/MY_PICTURE.jpeg";
 
 function Profile(): ReactElement {
   const flexBreakPoint = useBreakpointValue<FlexProps["direction"]>({
@@ -19,7 +20,7 @@ function Profile(): ReactElement {
   return (
     <Container centerContent>
       <Flex alignItems={"center"} direction={flexBreakPoint}>
-        <Image src="src/assets/MY_PICTURE.jpeg" size={"xs"} margin={"2"} />
+        <Image src={MyPicture} size={"xs"} margin={"2"} />
         <Container>
           <Heading size={"md"}>Tsubasa Kamekubo</Heading>
           <Text>
