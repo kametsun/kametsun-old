@@ -40,10 +40,10 @@ function Profile(): ReactElement {
         <Container>
           {isMobile ? (
             <Center>
-              <Heading size={"md"}>Tsubasa Kamekubo</Heading>
+              <Heading size={"lg"}>Tsubasa Kamekubo</Heading>
             </Center>
           ) : (
-            <Heading size={"md"}>Tsubasa Kamekubo</Heading>
+            <Heading size={"lg"}>Tsubasa Kamekubo</Heading>
           )}
           <Text>
             相川学園静清高等学校卒業<br></br>
@@ -61,7 +61,7 @@ function Profile(): ReactElement {
               <FontAwesomeIcon
                 icon={faGithub}
                 size={"2xl"}
-                m={"1"}
+                mx={"1"}
                 color={"blackAlpha.950"}
                 sx={linkStyles}
               />
@@ -74,7 +74,7 @@ function Profile(): ReactElement {
               <FontAwesomeIcon
                 icon={faXTwitter}
                 size={"2xl"}
-                m={"1"}
+                mx={"1"}
                 color={"blackAlpha.950"}
                 sx={linkStyles}
               />
