@@ -5,7 +5,7 @@ import { ReactElement } from "react";
 function MainLayout(): ReactElement {
   return (
     <main>
-      <VStack bg={"neutral.950"} color={"neutral.50"}>
+      <VStack bg={"whiteAlpha.950"} color={"blackAlpha.950"}>
         <Profile />
       </VStack>
     </main>

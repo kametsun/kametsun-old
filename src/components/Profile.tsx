@@ -5,11 +5,14 @@ import {
   FlexProps,
   Heading,
   Image,
+  Link,
   Text,
   useBreakpointValue,
 } from "@yamada-ui/react";
 import { ReactElement } from "react";
 import MyPicture from "@kametsun/assets/MY_PICTURE.jpeg";
+import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome";
+import { faGithub, faXTwitter } from "@fortawesome/free-brands-svg-icons";
 
 function Profile(): ReactElement {
   const flexBreakPoint = useBreakpointValue<FlexProps["direction"]>({
@@ -24,10 +27,16 @@ function Profile(): ReactElement {
     sm: true,
   });
 
+  const linkStyles = {
+    _hover: {
+      color: "blue.500",
+    },
+  };
+
   return (
     <Container centerContent>
       <Flex alignItems={"center"} direction={flexBreakPoint}>
-        <Image src={MyPicture} size={"64"} margin={"2"} />
+        <Image src={MyPicture} size={"72"} margin={"1"} />
         <Container>
           {isMobile ? (
             <Center>
@@ -47,6 +56,30 @@ function Profile(): ReactElement {
             <br></br>
             そして、エンジニアになるため進学しIT分野を専攻中。
           </Text>
+          <Flex justify={"end"}>
+            <Link as={"a"} href="https://github.com/kametsun" target="_blank">
+              <FontAwesomeIcon
+                icon={faGithub}
+                size={"2xl"}
+                m={"1"}
+                color={"blackAlpha.950"}
+                sx={linkStyles}
+              />
+            </Link>
+            <Link
+              as={"a"}
+              href="https://twitter.com/_kametsun_"
+              target="_blank"
+            >
+              <FontAwesomeIcon
+                icon={faXTwitter}
+                size={"2xl"}
+                m={"1"}
+                color={"blackAlpha.950"}
+                sx={linkStyles}
+              />
+            </Link>
+          </Flex>
         </Container>
       </Flex>
     </Container>
