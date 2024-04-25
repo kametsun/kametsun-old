@@ -13,7 +13,7 @@ const GithubCommits = () => {
           },
         });
         const data = await res.json();
-        console.log(token);
+
         const today = new Date().toISOString().slice(0, 10);
         const promises = data.map(async (repo: any) => {
           console.log(
