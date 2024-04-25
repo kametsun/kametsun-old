@@ -7,14 +7,13 @@ const GithubCommits = () => {
     const fetchRepositoryNames = async () => {
       try {
         const token = import.meta.env.VITE_GITHUB_API;
-        console.log(token);
         const res = await fetch(`https://api.github.com/users/kametsun/repos`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
         const data = await res.json();
-
+        console.log(token);
         const today = new Date().toISOString().slice(0, 10);
         const promises = data.map(async (repo: any) => {
           console.log(
