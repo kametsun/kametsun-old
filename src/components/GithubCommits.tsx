@@ -7,6 +7,7 @@ const GithubCommits = () => {
     const fetchRepositoryNames = async () => {
       try {
         const token = import.meta.env.VITE_GITHUB_API;
+        console.log(token);
         const res = await fetch(`https://api.github.com/users/kametsun/repos`, {
           headers: {
             Authorization: `Bearer ${token}`,
