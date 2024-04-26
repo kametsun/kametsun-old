@@ -1,3 +1,4 @@
+import { Box, Heading } from "@yamada-ui/react";
 import { useEffect, useState } from "react";
 
 const GithubCommits = () => {
@@ -14,30 +15,29 @@ const GithubCommits = () => {
         });
         const data = await res.json();
 
-        const today = new Date().toISOString().slice(0, 10);
-        const promises = data.map(async (repo: any) => {
-          console.log(
-            `https://api.github.com/repos/kametsun/${repo.name}/commits?since=${today}`,
+        const today = new Date();
+        const yesterday = new Date(today);
+        yesterday.setDate(today.getDate() - 1);
+        const yesterdayString = encodeURIComponent(
+          yesterday.toISOString().slice(0, 10)
+        );
+
+        let totalCount = 0;
+
+        data.map(async (repo: any) => {
+          const res = await fetch(
+            `https://api.github.com/repos/kametsun/${repo.name}/commits?since=${yesterdayString}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
             }
           );
-          const commitRes = await fetch(
-            `https://api.github.com/repos/kametsun/${repo.name}/commits?since=${today}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          const commitData = await commitRes.json();
-          return commitData.length;
+          const commitData = await res.json();
+          totalCount += await commitData.length;
+          setTotalCommits(totalCount);
         });
 
-        const counts = await Promise.all(promises);
-        const totalCount = counts.reduce((acc, cur) => acc + cur, 0);
         setTotalCommits(totalCount);
       } catch (e) {
         // TODO
@@ -49,9 +49,9 @@ const GithubCommits = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Today's Total Commits: {totalCommits}</h2>
-    </div>
+    <Box>
+      <Heading size={"md"}>Today's Total Commits: {totalCommits}</Heading>
+    </Box>
   );
 };
 
