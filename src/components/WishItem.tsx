@@ -1,4 +1,10 @@
-import { Heading, Image, LinkBox, LinkOverlay } from "@yamada-ui/react";
+import {
+  Heading,
+  Image,
+  LinkBox,
+  LinkOverlay,
+  useBreakpointValue,
+} from "@yamada-ui/react";
 import NoPicture from "@kametsun/assets/NO_PICTURE.png";
 
 interface Props {
@@ -8,6 +14,12 @@ interface Props {
 }
 
 function WishItem(props: Props) {
+  const isMobile = useBreakpointValue({
+    base: false,
+    md: true,
+    sm: true,
+  });
+
   const isProductUrl = props.productUrl && props.productUrl.trim() !== "";
 
   return (
@@ -18,8 +30,7 @@ function WishItem(props: Props) {
       borderColor={"blackAlpha.300"}
       bg={"whiteAlpha.50"}
       color={"blackAlpha.950"}
-      p={"10px"}
-      width={"30%"}
+      width={isMobile ? "auto" : "30%"}
     >
       {isProductUrl && <LinkOverlay href={props.productUrl} target="_blank" />}
       <Image
