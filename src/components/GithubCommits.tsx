@@ -1,3 +1,4 @@
+import StrangeFish from "@kametsun/assets/svg/StrangeFish";
 import { Heading, LinkBox, LinkOverlay } from "@yamada-ui/react";
 import { useEffect, useState } from "react";
 
@@ -49,12 +50,23 @@ const GithubCommits = () => {
   }, []);
 
   return (
-    <LinkBox>
+    <LinkBox
+      display={"flex"}
+      justifyContent={"center"}
+      p={"8"}
+      color={"blackAlpha.950"}
+      border={"solid"}
+      borderColor={"blackAlpha.300"}
+      alignItems={"center"}
+    >
       <LinkOverlay
         href="https://github.com/kametsun"
         target="_blank"
       ></LinkOverlay>
-      <Heading size={"md"}>Today's Total Commits: {totalCommits}</Heading>
+      <Heading size={"md"} px={"3px"}>
+        Today's Total Commits: {totalCommits}
+      </Heading>
+      <StrangeFish />
     </LinkBox>
   );
 };
