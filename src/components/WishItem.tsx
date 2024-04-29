@@ -1,4 +1,4 @@
-import { Box, Image, Link } from "@yamada-ui/react";
+import { Heading, Image, LinkBox, LinkOverlay } from "@yamada-ui/react";
 import NoPicture from "@kametsun/assets/NO_PICTURE.png";
 
 interface Props {
@@ -8,17 +8,29 @@ interface Props {
 }
 
 function WishItem(props: Props) {
+  const isProductUrl = props.productUrl && props.productUrl.trim() !== "";
+
   return (
-    <Box display={"flex"} alignItems={"center"}>
+    <LinkBox
+      display={"flex"}
+      alignItems={"center"}
+      border={"solid"}
+      borderColor={"blackAlpha.300"}
+      bg={"whiteAlpha.50"}
+      color={"blackAlpha.950"}
+      p={"10px"}
+      width={"30%"}
+    >
+      {isProductUrl && <LinkOverlay href={props.productUrl} target="_blank" />}
       <Image
         src={props.imageUrl ? props.imageUrl : NoPicture}
         m={"3"}
         boxSize={"150px"}
       />
-      <Link href={props.productUrl} target="_blank">
+      <Heading size={"md"} mx={"4px"}>
         {props.productName}
-      </Link>
-    </Box>
+      </Heading>
+    </LinkBox>
   );
 }
 
