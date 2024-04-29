@@ -30,16 +30,16 @@ function WishItem(props: Props) {
       borderColor={"blackAlpha.300"}
       bg={"whiteAlpha.50"}
       color={"blackAlpha.950"}
-      width={isMobile ? "auto" : "30%"}
+      width={isMobile ? "95%" : "30%"}
     >
       {isProductUrl && <LinkOverlay href={props.productUrl} target="_blank" />}
       <Image
         src={props.imageUrl ? props.imageUrl : NoPicture}
-        m={"3"}
+        m={"2"}
         boxSize={"150px"}
         height={"auto"}
       />
-      <Heading size={"md"} mx={"4px"}>
+      <Heading size={"sm"} mx={"4px"}>
         {props.productName}
       </Heading>
     </LinkBox>
