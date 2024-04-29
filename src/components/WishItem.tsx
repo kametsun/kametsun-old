@@ -37,6 +37,7 @@ function WishItem(props: Props) {
         src={props.imageUrl ? props.imageUrl : NoPicture}
         m={"3"}
         boxSize={"150px"}
+        height={"auto"}
       />
       <Heading size={"md"} mx={"4px"}>
         {props.productName}
