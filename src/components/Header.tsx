@@ -1,6 +1,6 @@
 import { Box, Flex, Heading, Spacer } from "@yamada-ui/react";
 import { ReactElement } from "react";
-import GithubCommits from "./GithubCommits";
+import Navigation from "./Navigation";
 
 function Header(): ReactElement {
   return (
@@ -15,7 +15,7 @@ function Header(): ReactElement {
         <Flex>
           <Heading size={"md"}>Welcome to Tsubasa's page!</Heading>
           <Spacer />
-          <GithubCommits />
+          <Navigation />
         </Flex>
       </Box>
     </header>
