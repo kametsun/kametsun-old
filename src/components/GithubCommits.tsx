@@ -1,4 +1,4 @@
-import { Box, Heading } from "@yamada-ui/react";
+import { Heading, LinkBox, LinkOverlay } from "@yamada-ui/react";
 import { useEffect, useState } from "react";
 
 const GithubCommits = () => {
@@ -49,9 +49,13 @@ const GithubCommits = () => {
   }, []);
 
   return (
-    <Box>
+    <LinkBox>
+      <LinkOverlay
+        href="https://github.com/kametsun"
+        target="_blank"
+      ></LinkOverlay>
       <Heading size={"md"}>Today's Total Commits: {totalCommits}</Heading>
-    </Box>
+    </LinkBox>
   );
 };
 
