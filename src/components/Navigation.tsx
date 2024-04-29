@@ -4,21 +4,21 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Link,
 } from "@yamada-ui/react";
 import { ReactElement } from "react";
 import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome";
 import { faBars, faHouse, faStar } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 
 function MenuItems() {
   return (
     <MenuList>
-      <MenuItem icon={<FontAwesomeIcon icon={faHouse} />}>
-        <Link to={"/"}>Home</Link>
-      </MenuItem>
-      <MenuItem icon={<FontAwesomeIcon icon={faStar} />}>
-        <Link to={"/wishlist"}>Wishlist</Link>
-      </MenuItem>
+      <Link href="/">
+        <MenuItem icon={<FontAwesomeIcon icon={faHouse} />}>Home</MenuItem>
+      </Link>
+      <Link href="/wishlist">
+        <MenuItem icon={<FontAwesomeIcon icon={faStar} />}>Wishlist</MenuItem>
+      </Link>
     </MenuList>
   );
 }
