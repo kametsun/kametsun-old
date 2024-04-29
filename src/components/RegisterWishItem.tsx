@@ -7,6 +7,7 @@ import {
   InputLeftAddon,
 } from "@yamada-ui/react";
 import { useState } from "react";
+import WishItem from "./WishItem";
 
 function RegisterWishItem() {
   const [imageUrl, setImageUrl] = useState("");
@@ -45,6 +46,11 @@ function RegisterWishItem() {
   return (
     <form onSubmit={handleSubmit}>
       <Container centerContent>
+        <WishItem
+          imageUrl={imageUrl}
+          productName={itemName}
+          productUrl={itemUrl}
+        />
         <Heading>Register wish item!</Heading>
         <InputGroup width={"30%"}>
           <InputLeftAddon>https://</InputLeftAddon>
