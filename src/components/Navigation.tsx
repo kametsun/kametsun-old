@@ -5,6 +5,8 @@ import {
   MenuItem,
   MenuList,
   Link,
+  useBreakpointValue,
+  Box,
 } from "@yamada-ui/react";
 import { ReactElement } from "react";
 import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome";
@@ -12,30 +14,43 @@ import { faBars, faHouse, faStar } from "@fortawesome/free-solid-svg-icons";
 
 function MenuItems() {
   return (
-    <MenuList>
-      <Link href="/">
+    <>
+      <Link href="/" _hover={"none"} color={"blackAlpha.950"}>
         <MenuItem icon={<FontAwesomeIcon icon={faHouse} />}>Home</MenuItem>
       </Link>
-      <Link href="/wishlist">
+      <Link href="/wishlist" _hover={"none"} color={"blackAlpha.950"}>
         <MenuItem icon={<FontAwesomeIcon icon={faStar} />}>Wishlist</MenuItem>
       </Link>
-    </MenuList>
+    </>
   );
 }
 
 function Navigation(): ReactElement {
-  return (
+  const isMobile = useBreakpointValue({
+    base: false,
+    md: false,
+    sm: true,
+  });
+
+  return isMobile ? (
     <Menu>
       <MenuButton
         as={IconButton}
         icon={<FontAwesomeIcon size="xs" icon={faBars} />}
         variant={"outline"}
-        color={"blackAlpha.950"}
         border={"solid"}
         borderColor={"blackAlpha.300"}
-      ></MenuButton>
-      <MenuItems />
+      />
+      <MenuList>
+        <MenuItems />
+      </MenuList>
     </Menu>
+  ) : (
+    <Box display={"flex"}>
+      <Menu>
+        <MenuItems />
+      </Menu>
+    </Box>
   );
 }
 
