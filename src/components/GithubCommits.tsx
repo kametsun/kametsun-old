@@ -9,6 +9,10 @@ const GithubCommits = () => {
     const fetchRepositoryNames = async () => {
       try {
         const res = await fetch(`https://api.github.com/users/kametsun/repos`);
+        if (res.status === 403) {
+          setTotalCommits(NaN);
+          return;
+        }
         const data = await res.json();
 
         let totalCount = 0;
