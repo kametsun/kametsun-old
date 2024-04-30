@@ -8,31 +8,18 @@ const GithubCommits = () => {
   useEffect(() => {
     const fetchRepositoryNames = async () => {
       try {
-        const token = import.meta.env.VITE_GITHUB_API;
-        const res = await fetch(`https://api.github.com/users/kametsun/repos`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await fetch(`https://api.github.com/users/kametsun/repos`);
         const data = await res.json();
-
-        const today = new Date();
-        const yesterday = new Date(today);
-        yesterday.setDate(today.getDate() - 1);
-        const yesterdayString = encodeURIComponent(
-          yesterday.toISOString().slice(0, 10)
-        );
 
         let totalCount = 0;
 
         data.map(async (repo: any) => {
+          // 今日のコミットにするか今までのコミットにするか悩んでる
+          // const res = await fetch(
+          //   `https://api.github.com/repos/kametsun/${repo.name}/commits?since=${yesterdayString}`
+          // );
           const res = await fetch(
-            `https://api.github.com/repos/kametsun/${repo.name}/commits?since=${yesterdayString}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
+            `https://api.github.com/repos/kametsun/${repo.name}/commits`
           );
           const commitData = await res.json();
           totalCount += await commitData.length;
@@ -50,24 +37,28 @@ const GithubCommits = () => {
   }, []);
 
   return (
-    <LinkBox
-      display={"flex"}
-      justifyContent={"center"}
-      p={"8"}
-      color={"blackAlpha.950"}
-      border={"solid"}
-      borderColor={"blackAlpha.300"}
-      alignItems={"center"}
-    >
-      <LinkOverlay
-        href="https://github.com/kametsun"
-        target="_blank"
-      ></LinkOverlay>
-      <Heading size={"md"} px={"3px"}>
-        Today's Total Commits: {totalCommits}
-      </Heading>
-      <StrangeFish />
-    </LinkBox>
+    <>
+      {!isNaN(totalCommits) && (
+        <LinkBox
+          display={"flex"}
+          justifyContent={"center"}
+          p={"8"}
+          color={"blackAlpha.950"}
+          border={"solid"}
+          borderColor={"blackAlpha.300"}
+          alignItems={"center"}
+        >
+          <LinkOverlay
+            href="https://github.com/kametsun"
+            target="_blank"
+          ></LinkOverlay>
+          <Heading size={"md"} px={"3px"}>
+            Total commit of public repositories: {totalCommits}
+          </Heading>
+          <StrangeFish />
+        </LinkBox>
+      )}
+    </>
   );
 };
 
