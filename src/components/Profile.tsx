@@ -68,7 +68,7 @@ function Profile(): ReactElement {
             </Link>
             <Link
               as={"a"}
-              href="https://twitter.com/_kametsun_"
+              href="https://twitter.com/puktikiapukoh"
               target="_blank"
             >
               <FontAwesomeIcon
