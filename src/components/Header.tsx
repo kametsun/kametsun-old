@@ -28,7 +28,7 @@ function Header(): ReactElement {
           <Navigation />
         </Flex>
       </Box>
-      <Box pt={"calc(3rem + 2px)"} />
+      <Box pt={"calc(4rem + 2px)"} />
     </>
   );
 }
