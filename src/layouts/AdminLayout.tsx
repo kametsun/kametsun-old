@@ -1,3 +1,4 @@
+import RegisterArticle from "@kametsun/components/RegisterArticle";
 import RegisterWishItem from "@kametsun/components/RegisterWishItem";
 import { Container, VStack } from "@yamada-ui/react";
 
@@ -7,6 +8,7 @@ function AdminLayout() {
       <VStack>
         <Container>
           <RegisterWishItem />
+          <RegisterArticle />
         </Container>
       </VStack>
     </main>
