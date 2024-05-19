@@ -8,7 +8,9 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
+  Switch,
   useDisclosure,
+  Text,
 } from "@yamada-ui/react";
 import { useState } from "react";
 import MarkdownEditor from "./MarkdownEditor";
@@ -16,6 +18,8 @@ import MarkdownEditor from "./MarkdownEditor";
 function RegisterArticle() {
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
+  const [thumbnail, setThumbnail] = useState("");
+  const [isPublic, setIsPublic] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isTitleInvalid, setIsTitleInvalid] = useState(false);
   const [isTextInvalid, setIsTextInvalid] = useState(false);
@@ -41,10 +45,20 @@ function RegisterArticle() {
     setTitle(e.target.value);
   };
 
+  const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setThumbnail(e.target.value);
+  };
+
+  const handlePublicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsPublic(e.target.checked);
+  };
+
   const handleSubmit = async () => {
     const articleData = {
       title,
       content: text,
+      thumbnail,
+      isPublic,
     };
 
     try {
@@ -87,6 +101,16 @@ function RegisterArticle() {
           isInvalid={isTitleInvalid}
         />
       </InputGroup>
+      <InputGroup width={"50%"} p={"sm"}>
+        <Input
+          value={thumbnail}
+          border={"solid"}
+          borderColor={"blackAlpha.300"}
+          borderRadius={"base"}
+          onChange={handleThumbnailChange}
+          placeholder="Input thumbnail URL"
+        />
+      </InputGroup>
 
       <MarkdownEditor
         handleChange={handleTextChange}
@@ -95,7 +119,11 @@ function RegisterArticle() {
         isInvalid={isTextInvalid}
       />
 
-      <Box display="flex" justifyContent="flex-end" mt="sm">
+      <Box display="flex" alignItems="center" justifyContent="flex-end" mt="sm">
+        <Box display="flex" alignItems="center" mr="2">
+          <Switch isChecked={isPublic} onChange={handlePublicChange} />
+          <Text ml="2">公開</Text>
+        </Box>
         <Button colorScheme="blue" onClick={handleOpen}>
           確認
         </Button>

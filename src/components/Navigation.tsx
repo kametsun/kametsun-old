@@ -10,7 +10,12 @@ import {
 } from "@yamada-ui/react";
 import { ReactElement } from "react";
 import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome";
-import { faBars, faHouse, faStar } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faHouse,
+  faNewspaper,
+  faStar,
+} from "@fortawesome/free-solid-svg-icons";
 
 function MenuItems() {
   return (
@@ -20,6 +25,11 @@ function MenuItems() {
       </Link>
       <Link href="/wishlist" _hover={"none"} color={"blackAlpha.950"}>
         <MenuItem icon={<FontAwesomeIcon icon={faStar} />}>Wishlist</MenuItem>
+      </Link>
+      <Link href="/articles" _hover={"none"} color={"blackAlpha.950"}>
+        <MenuItem icon={<FontAwesomeIcon icon={faNewspaper} />}>
+          Article
+        </MenuItem>
       </Link>
     </>
   );
