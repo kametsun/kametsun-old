@@ -1,51 +1,33 @@
+import { useEffect, useState } from "react";
 import { VStack, Box, Heading, Text, Image } from "@yamada-ui/react";
 
-const articles = [
-  {
-    id: 1,
-    title: "First Article",
-    summary: "This is the summary of the first article.",
-    image: "https://via.placeholder.com/150", // Replace with actual image URL
-  },
-  {
-    id: 2,
-    title: "Second Article",
-    summary: "This is the summary of the second article.",
-    image: "https://via.placeholder.com/150", // Replace with actual image URL
-  },
-  {
-    id: 3,
-    title: "Third Article",
-    summary: "This is the summary of the third article.",
-    image: "https://via.placeholder.com/150", // Replace with actual image URL
-  },
-  {
-    id: 1,
-    title: "First Article",
-    summary: "This is the summary of the first article.",
-    image: "https://via.placeholder.com/150", // Replace with actual image URL
-  },
-  {
-    id: 2,
-    title: "Second Article",
-    summary: "This is the summary of the second article.",
-    image: "https://via.placeholder.com/150", // Replace with actual image URL
-  },
-  {
-    id: 3,
-    title: "Third Article",
-    summary: "This is the summary of the third article.",
-    image: "https://via.placeholder.com/150", // Replace with actual image URL
-  },
-  {
-    id: 4,
-    title: "Fourth Article",
-    summary: "This is the summary of the fourth article.",
-    image: "https://via.placeholder.com/150", // Replace with actual image URL
-  },
-];
+interface Article {
+  id: string;
+  title: string;
+  content: string;
+  isPublic: boolean;
+  thumbnail: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 function ArticleLayout() {
+  const [articles, setArticles] = useState<Article[]>([]);
+
+  useEffect(() => {
+    fetchArticles();
+  }, []);
+
+  const fetchArticles = async () => {
+    try {
+      const response = await fetch(import.meta.env.VITE_BLOG_URL + "/articles");
+      const data: Article[] = await response.json();
+      setArticles(data);
+    } catch (error) {
+      console.error("Error fetching articles:", error);
+    }
+  };
+
   return (
     <VStack align="stretch">
       {articles.map((article) => (
@@ -59,7 +41,7 @@ function ArticleLayout() {
           alignItems="center"
         >
           <Image
-            src={article.image}
+            src={article.thumbnail}
             alt={article.title}
             boxSize="150px"
             objectFit="cover"
@@ -67,11 +49,12 @@ function ArticleLayout() {
           />
           <Box>
             <Heading size="md">{article.title}</Heading>
-            <Text mt={2}>{article.summary}</Text>
+            <Text mt={2}>{article.content}</Text>
           </Box>
         </Box>
       ))}
     </VStack>
   );
 }
+
 export default ArticleLayout;
