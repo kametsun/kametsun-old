@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { VStack, Box, Heading, Text, Image } from "@yamada-ui/react";
+import { VStack, Flex } from "@yamada-ui/react";
+import ArticleButton from "@kametsun/components/ArticleButton";
 
 interface Article {
   id: string;
@@ -29,31 +30,18 @@ function ArticleLayout() {
   };
 
   return (
-    <VStack align="stretch">
-      {articles.map((article) => (
-        <Box
-          key={article.id}
-          p={4}
-          borderWidth="1px"
-          borderRadius="md"
-          boxShadow="sm"
-          display="flex"
-          alignItems="center"
-        >
-          <Image
-            src={article.thumbnail}
-            alt={article.title}
-            boxSize="150px"
-            objectFit="cover"
-            mr={4}
+    <Flex align={"center"} justify={"center"} height={"100vh"}>
+      <VStack align="stretch" p={"3"} width={"70%"}>
+        {articles.map((article) => (
+          <ArticleButton
+            key={article.id}
+            id={article.id}
+            title={article.title}
+            thumbnail={article.thumbnail}
           />
-          <Box>
-            <Heading size="md">{article.title}</Heading>
-            <Text mt={2}>{article.content}</Text>
-          </Box>
-        </Box>
-      ))}
-    </VStack>
+        ))}
+      </VStack>
+    </Flex>
   );
 }
 
