@@ -21,7 +21,7 @@ function MarkdownEditor(props: Props) {
         m={"1"}
         isInvalid={props.isInvalid}
       />
-      <Container width={"50%"} height="600px" m="1">
+      <Container width={"50%"} height="600px" m="1" overflow={"auto"}>
         <ReactMarkdown className={"markdown"}>{props.text}</ReactMarkdown>
       </Container>
     </Flex>
