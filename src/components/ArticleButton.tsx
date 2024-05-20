@@ -1,4 +1,4 @@
-import { Box, Heading, Image } from "@yamada-ui/react";
+import { Box, Image, Text } from "@yamada-ui/react";
 import { Link } from "react-router-dom";
 
 interface Props {
@@ -12,7 +12,7 @@ function ArticleButton(props: Props) {
     <Link to={`/articles/${props.id}`}>
       <Box
         key={props.id}
-        p={"5"}
+        p={"1"}
         borderWidth="1px"
         borderRadius="md"
         boxShadow="sm"
@@ -27,7 +27,7 @@ function ArticleButton(props: Props) {
           mr={4}
         />
         <Box>
-          <Heading size="md">{props.title}</Heading>
+          <Text>{props.title}</Text>
         </Box>
       </Box>
     </Link>
