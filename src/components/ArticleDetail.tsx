@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from "@yamada-ui/react";
+import { Box, Container, Heading, Text } from "@yamada-ui/react";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { useParams } from "react-router-dom";
@@ -33,14 +33,18 @@ function ArticleDetail() {
 
   return (
     <Box
-      p={"8"}
+      p={"6"}
       display="flex"
       flexDirection="column"
       alignItems="center"
       minHeight="100vh"
     >
-      <Heading py={"5"}>{article.title}</Heading>
-      <ReactMarkdown className={"markdown"}>{article.content}</ReactMarkdown>
+      <Heading px={"1"} size={"md"}>
+        {article.title}
+      </Heading>
+      <Container>
+        <ReactMarkdown className={"markdown"}>{article.content}</ReactMarkdown>
+      </Container>
     </Box>
   );
 }
