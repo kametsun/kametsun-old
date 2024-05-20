@@ -32,8 +32,14 @@ function ArticleDetail() {
   if (!article) return <Text>Loading...</Text>;
 
   return (
-    <Box p={"5"}>
-      <Heading>{article.title}</Heading>
+    <Box
+      p={"8"}
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      minHeight="100vh"
+    >
+      <Heading py={"5"}>{article.title}</Heading>
       <ReactMarkdown className={"markdown"}>{article.content}</ReactMarkdown>
     </Box>
   );
