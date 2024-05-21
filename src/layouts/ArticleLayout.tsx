@@ -9,7 +9,7 @@ interface Article {
   isPublic: boolean;
   thumbnail: string;
   createdAt: string;
-  updatedAt: string;
+  updatedAt?: string;
 }
 
 function ArticleLayout() {
