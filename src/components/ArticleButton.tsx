@@ -22,6 +22,7 @@ function ArticleButton(props: Props) {
         display="flex"
         alignItems="center"
         position="relative"
+        shadow={"lg"}
       >
         <Image
           src={props.thumbnail}
@@ -31,7 +32,7 @@ function ArticleButton(props: Props) {
           mr={4}
         />
         <Box flex={"1"}>
-          <Text as={"b"} lineClamp={1}>
+          <Text as={"b"} lineClamp={2}>
             {props.title}
           </Text>
         </Box>

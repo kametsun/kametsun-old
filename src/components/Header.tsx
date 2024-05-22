@@ -8,7 +8,7 @@ function Header(): ReactElement {
       <Box
         as="header"
         p={"3"}
-        bg={"whiteAlpha.50"}
+        bg={"white"}
         shadow={"lg"}
         boxShadow={"3xl"}
         color={"blackAlpha.950"}
