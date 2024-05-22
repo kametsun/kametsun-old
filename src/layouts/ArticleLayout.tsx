@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { VStack, Flex, useBreakpointValue, Loading } from "@yamada-ui/react";
+import {
+  VStack,
+  Flex,
+  useBreakpointValue,
+  Loading,
+  HStack,
+} from "@yamada-ui/react";
 import ArticleButton from "@kametsun/components/ArticleButton";
 
 interface Article {
@@ -15,6 +21,11 @@ interface Article {
 function ArticleLayout() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const LayoutComponent = useBreakpointValue({
+    base: HStack,
+    md: VStack,
+  });
 
   const width = useBreakpointValue({
     base: "70%",
@@ -45,17 +56,19 @@ function ArticleLayout() {
           <Loading variant="circles" size={"9xl"} />
         </Flex>
       ) : (
-        <VStack align="stretch" p={"3"} width={width}>
-          {articles.map((article) => (
-            <ArticleButton
-              key={article.id}
-              id={article.id}
-              title={article.title}
-              thumbnail={article.thumbnail}
-              createdAt={article.createdAt}
-            />
-          ))}
-        </VStack>
+        LayoutComponent && (
+          <LayoutComponent align={"stretch"} p={"3"} width={width}>
+            {articles.map((article) => (
+              <ArticleButton
+                key={article.id}
+                id={article.id}
+                title={article.title}
+                thumbnail={article.thumbnail}
+                createdAt={article.createdAt}
+              />
+            ))}
+          </LayoutComponent>
+        )
       )}
     </Flex>
   );
