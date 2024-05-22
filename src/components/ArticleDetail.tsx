@@ -1,4 +1,4 @@
-import { Box, Container, Heading, Text } from "@yamada-ui/react";
+import { Box, Container, Flex, Heading, Loading } from "@yamada-ui/react";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { useParams } from "react-router-dom";
@@ -12,6 +12,7 @@ interface Article {
 function ArticleDetail() {
   const { id } = useParams<{ id: string }>();
   const [article, setArticle] = useState<Article | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -23,13 +24,13 @@ function ArticleDetail() {
         setArticle(data);
       } catch (error) {
         console.log("Error fetching article: ", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchArticle();
   }, [id]);
-
-  if (!article) return <Text>Loading...</Text>;
 
   return (
     <Box
@@ -37,14 +38,25 @@ function ArticleDetail() {
       display="flex"
       flexDirection="column"
       alignItems="center"
+      justifyContent={"center"}
       minHeight="100vh"
     >
-      <Heading px={"1"} size={"md"}>
-        {article.title}
-      </Heading>
-      <Container>
-        <ReactMarkdown className={"markdown"}>{article.content}</ReactMarkdown>
-      </Container>
+      {isLoading ? (
+        <Flex align={"center"} justify={"center"} height={"100hv"}>
+          <Loading variant="circles" size={"9xl"} />
+        </Flex>
+      ) : (
+        <>
+          <Heading px={"1"} size={"md"}>
+            {article?.title}
+          </Heading>
+          <Container>
+            <ReactMarkdown className={"markdown"}>
+              {article?.content}
+            </ReactMarkdown>
+          </Container>
+        </>
+      )}
     </Box>
   );
 }
