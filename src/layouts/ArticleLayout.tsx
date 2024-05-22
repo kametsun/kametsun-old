@@ -22,10 +22,6 @@ function ArticleLayout() {
     sm: "95%",
   });
 
-  useEffect(() => {
-    fetchArticles();
-  }, []);
-
   const fetchArticles = async () => {
     try {
       const response = await fetch(import.meta.env.VITE_BLOG_URL + "/articles");
@@ -37,6 +33,10 @@ function ArticleLayout() {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchArticles();
+  }, []);
 
   return (
     <Flex align={"center"} justify={"center"} height={"100vh"}>
