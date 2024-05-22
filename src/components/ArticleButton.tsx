@@ -15,7 +15,7 @@ function ArticleButton(props: Props) {
     <Link to={`/articles/${props.id}`}>
       <Box
         key={props.id}
-        p={"1"}
+        p={"2"}
         borderWidth="1px"
         borderRadius="md"
         boxShadow="sm"
@@ -29,7 +29,7 @@ function ArticleButton(props: Props) {
           alt={props.title}
           boxSize="150px"
           objectFit="cover"
-          mr={4}
+          mx={1}
         />
         <Box flex={"1"}>
           <Text as={"b"} lineClamp={2}>
