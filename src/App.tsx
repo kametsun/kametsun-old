@@ -12,24 +12,22 @@ function App() {
   const adminURL = import.meta.env.VITE_ADMIN_URL;
 
   return (
-    <>
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<MainLayout />} />
-          <Route path="/wishlist" element={<WishlistLayout />} />
-          <Route path="/articles" element={<ArticleLayout />} />
-          <Route path="/articles/:id" element={<ArticleDetail />} />
-          <Route path={adminURL} element={<AdminLayout />} />
-          <Route path={adminURL + "/articles"} element={<ArticleLayout />} />
-          <Route
-            path={adminURL + "/articles/new"}
-            element={<RegisterArticle />}
-          />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<MainLayout />} />
+        <Route path="/wishlist" element={<WishlistLayout />} />
+        <Route path="/articles" element={<ArticleLayout />} />
+        <Route path="/articles/:id" element={<ArticleDetail />} />
+        <Route path={adminURL} element={<AdminLayout />} />
+        <Route path={`${adminURL}/articles`} element={<ArticleLayout />} />
+        <Route
+          path={`${adminURL}/articles/new`}
+          element={<RegisterArticle />}
+        />
+      </Routes>
+      <Footer />
+    </BrowserRouter>
   );
 }
 
