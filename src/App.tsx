@@ -6,6 +6,7 @@ import WishlistLayout from "@kametsun/layouts/WishlistLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import ArticleLayout from "./layouts/ArticleLayout";
 import ArticleDetail from "./components/ArticleDetail";
+import RegisterArticle from "./components/RegisterArticle";
 
 function App() {
   const adminURL = import.meta.env.VITE_ADMIN_URL;
@@ -20,6 +21,11 @@ function App() {
           <Route path="/articles" element={<ArticleLayout />} />
           <Route path="/articles/:id" element={<ArticleDetail />} />
           <Route path={adminURL} element={<AdminLayout />} />
+          <Route path={adminURL + "/articles"} element={<ArticleLayout />} />
+          <Route
+            path={adminURL + "/articles/new"}
+            element={<RegisterArticle />}
+          />
         </Routes>
         <Footer />
       </BrowserRouter>
