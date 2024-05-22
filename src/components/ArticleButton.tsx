@@ -1,3 +1,4 @@
+import formatDate from "@kametsun/utils/FormatTime";
 import { Box, Image, Text } from "@yamada-ui/react";
 import { Link } from "react-router-dom";
 
@@ -5,9 +6,11 @@ interface Props {
   id: string;
   title: string;
   thumbnail: string;
+  createdAt: string;
 }
 
 function ArticleButton(props: Props) {
+  console.log(props.createdAt);
   return (
     <Link to={`/articles/${props.id}`}>
       <Box
@@ -18,6 +21,7 @@ function ArticleButton(props: Props) {
         boxShadow="sm"
         display="flex"
         alignItems="center"
+        position="relative"
       >
         <Image
           src={props.thumbnail}
@@ -26,9 +30,20 @@ function ArticleButton(props: Props) {
           objectFit="cover"
           mr={4}
         />
-        <Box>
-          <Text>{props.title}</Text>
+        <Box flex={"1"}>
+          <Text as={"b"} lineClamp={1}>
+            {props.title}
+          </Text>
         </Box>
+        <Text
+          position={"absolute"}
+          bottom={"1"}
+          right={"1"}
+          px={"2"}
+          color={"gray.300"}
+        >
+          投稿日: {formatDate(props.createdAt)}
+        </Text>
       </Box>
     </Link>
   );

@@ -52,6 +52,7 @@ function ArticleLayout() {
               id={article.id}
               title={article.title}
               thumbnail={article.thumbnail}
+              createdAt={article.createdAt}
             />
           ))}
         </VStack>
