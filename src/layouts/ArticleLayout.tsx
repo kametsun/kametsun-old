@@ -5,6 +5,7 @@ import {
   useBreakpointValue,
   Loading,
   HStack,
+  Heading,
 } from "@yamada-ui/react";
 import ArticleButton from "@kametsun/components/ArticleButton";
 
@@ -20,6 +21,7 @@ interface Article {
 
 function ArticleLayout() {
   const [articles, setArticles] = useState<Article[]>([]);
+  const [articleCount, setArticleCount] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const LayoutComponent = useBreakpointValue({
@@ -45,32 +47,54 @@ function ArticleLayout() {
     }
   };
 
+  const fetchArticleCount = async () => {
+    try {
+      const res = await fetch(
+        import.meta.env.VITE_BLOG_URL + "/articles/count"
+      );
+      const count = await res.json();
+      setArticleCount(count);
+    } catch (error) {
+      console.error("カウント取得エラーが発生しました" + error);
+    }
+  };
+
   useEffect(() => {
     fetchArticles();
+    fetchArticleCount();
   }, []);
 
   return (
-    <Flex align={"center"} justify={"center"} height={"auto"} py={"12"}>
-      {isLoading ? (
-        <Flex align={"center"} justify={"center"} height={"100hv"}>
-          <Loading variant="circles" size={"9xl"} />
-        </Flex>
-      ) : (
-        LayoutComponent && (
-          <LayoutComponent align={"stretch"} p={"3"} width={width}>
-            {articles.map((article) => (
-              <ArticleButton
-                key={article.id}
-                id={article.id}
-                title={article.title}
-                thumbnail={article.thumbnail}
-                createdAt={article.createdAt}
-              />
-            ))}
-          </LayoutComponent>
-        )
-      )}
-    </Flex>
+    <>
+      <Flex justifyContent={"center"} m={"5"}>
+        {articleCount !== null && !isLoading && (
+          <Heading as={"h2"} fontSize="lg">
+            記事件数: {articleCount}件
+          </Heading>
+        )}
+      </Flex>
+      <Flex align={"center"} justify={"center"} height={"auto"} py={"12"}>
+        {isLoading ? (
+          <Flex align={"center"} justify={"center"} height={"100hv"}>
+            <Loading variant="circles" size={"9xl"} />
+          </Flex>
+        ) : (
+          LayoutComponent && (
+            <LayoutComponent align={"stretch"} p={"3"} width={width}>
+              {articles.map((article) => (
+                <ArticleButton
+                  key={article.id}
+                  id={article.id}
+                  title={article.title}
+                  thumbnail={article.thumbnail}
+                  createdAt={article.createdAt}
+                />
+              ))}
+            </LayoutComponent>
+          )
+        )}
+      </Flex>
+    </>
   );
 }
 
