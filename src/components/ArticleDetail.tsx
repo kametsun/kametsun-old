@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Heading, Loading } from "@yamada-ui/react";
+import { Box, Container, Flex, Loading } from "@yamada-ui/react";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { useParams } from "react-router-dom";
@@ -46,16 +46,11 @@ function ArticleDetail() {
           <Loading variant="circles" size={"9xl"} />
         </Flex>
       ) : (
-        <>
-          <Heading px={"1"} size={"md"}>
-            {article?.title}
-          </Heading>
-          <Container>
-            <ReactMarkdown className={"markdown"}>
-              {article?.content}
-            </ReactMarkdown>
-          </Container>
-        </>
+        <Container>
+          <ReactMarkdown className={"markdown"}>
+            {article?.content}
+          </ReactMarkdown>
+        </Container>
       )}
     </Box>
   );
