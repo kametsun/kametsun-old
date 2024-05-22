@@ -39,7 +39,7 @@ function ArticleLayout() {
   }, []);
 
   return (
-    <Flex align={"center"} justify={"center"} height={"100vh"}>
+    <Flex align={"center"} justify={"center"} height={"auto"} py={"12"}>
       {isLoading ? (
         <Flex align={"center"} justify={"center"} height={"100hv"}>
           <Loading variant="circles" size={"9xl"} />
