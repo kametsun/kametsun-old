@@ -27,6 +27,7 @@ function ArticleLayout() {
   const [articleCount, setArticleCount] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(true);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [dots, setDots] = useState("");
 
   const LayoutComponent = useBreakpointValue({
     base: HStack,
@@ -42,6 +43,14 @@ function ArticleLayout() {
   useEffect(() => {
     fetchArticles();
     fetchArticleCount();
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDots((prev) => (prev.length < 3 ? prev + "." : ""));
+    }, 200);
+
+    return () => clearInterval(interval);
   }, []);
 
   const fetchArticles = async () => {
@@ -126,7 +135,10 @@ function ArticleLayout() {
       >
         {isLoading ? (
           <Flex align={"center"} justify={"center"} height={"100hv"}>
-            <Loading variant="circles" size={"9xl"} />
+            <VStack alignItems={"center"} justifyItems={"center"}>
+              <Loading variant="circles" size={"9xl"} py={"2"} />
+              <Heading size={"md"}>Connecting{dots}</Heading>
+            </VStack>
           </Flex>
         ) : (
           LayoutComponent && (
