@@ -24,7 +24,7 @@ interface Article {
 
 function ArticleLayout() {
   const [articles, setArticles] = useState<Article[]>([]);
-  const [articleCount, setArticleCount] = useState<number | null>(null);
+  const [articleCount, setArticleCount] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(true);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
 
@@ -91,7 +91,7 @@ function ArticleLayout() {
   return (
     <>
       <Flex justifyContent={"center"} m={"5"}>
-        {articleCount !== null && !isLoading && (
+        {articleCount !== null && (
           <LayoutComponent
             display={"flex"}
             justify={"center"}
@@ -117,7 +117,13 @@ function ArticleLayout() {
           </LayoutComponent>
         )}
       </Flex>
-      <Flex align={"center"} justify={"center"} height={"auto"} py={"8"}>
+      <Flex
+        align={"center"}
+        justify={"center"}
+        height={"auto"}
+        pt={"4"}
+        pb={"6"}
+      >
         {isLoading ? (
           <Flex align={"center"} justify={"center"} height={"100hv"}>
             <Loading variant="circles" size={"9xl"} />
