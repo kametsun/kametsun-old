@@ -117,7 +117,7 @@ function ArticleLayout() {
           </LayoutComponent>
         )}
       </Flex>
-      <Flex align={"center"} justify={"center"} height={"auto"} py={"12"}>
+      <Flex align={"center"} justify={"center"} height={"auto"} py={"8"}>
         {isLoading ? (
           <Flex align={"center"} justify={"center"} height={"100hv"}>
             <Loading variant="circles" size={"9xl"} />
