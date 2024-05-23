@@ -6,8 +6,11 @@ import {
   Loading,
   HStack,
   Heading,
+  Button,
 } from "@yamada-ui/react";
 import ArticleButton from "@kametsun/components/ArticleButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSort } from "@fortawesome/free-solid-svg-icons";
 
 interface Article {
   id: string;
@@ -23,6 +26,7 @@ function ArticleLayout() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [articleCount, setArticleCount] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
   const LayoutComponent = useBreakpointValue({
     base: HStack,
@@ -64,13 +68,45 @@ function ArticleLayout() {
     fetchArticleCount();
   }, []);
 
+  const sortArticles = () => {
+    const sortedArticles = [...articles].sort((a, b) => {
+      if (sortOrder === "asc") {
+        return (
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        );
+      } else {
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+      }
+    });
+    setArticles(sortedArticles);
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+  };
+
   return (
     <>
       <Flex justifyContent={"center"} m={"5"}>
         {articleCount !== null && !isLoading && (
-          <Heading as={"h2"} fontSize="lg">
-            記事件数: {articleCount}件
-          </Heading>
+          <LayoutComponent
+            display={"flex"}
+            justify={"center"}
+            align={"center"}
+            pt={"5"}
+          >
+            <Heading as={"h2"} fontSize="lg">
+              記事件数: {articleCount}件
+            </Heading>
+            <Button
+              colorScheme="warning"
+              variant="ghost"
+              leftIcon={<FontAwesomeIcon icon={faSort} />}
+              onClick={sortArticles}
+              width={"40%"}
+            >
+              投稿日
+            </Button>
+          </LayoutComponent>
         )}
       </Flex>
       <Flex align={"center"} justify={"center"} height={"auto"} py={"12"}>
