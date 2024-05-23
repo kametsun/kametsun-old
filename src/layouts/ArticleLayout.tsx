@@ -10,7 +10,7 @@ import {
 } from "@yamada-ui/react";
 import ArticleButton from "@kametsun/components/ArticleButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSort } from "@fortawesome/free-solid-svg-icons";
+import { faSortDown, faSortUp } from "@fortawesome/free-solid-svg-icons";
 
 interface Article {
   id: string;
@@ -26,7 +26,7 @@ function ArticleLayout() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [articleCount, setArticleCount] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
 
   const LayoutComponent = useBreakpointValue({
     base: HStack,
@@ -39,10 +39,19 @@ function ArticleLayout() {
     sm: "95%",
   });
 
+  useEffect(() => {
+    fetchArticles();
+    fetchArticleCount();
+  }, []);
+
   const fetchArticles = async () => {
     try {
       const response = await fetch(import.meta.env.VITE_BLOG_URL + "/articles");
-      const data: Article[] = await response.json();
+      let data: Article[] = await response.json();
+      data = data.sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
       setArticles(data);
     } catch (error) {
       console.error("Error fetching articles:", error);
@@ -63,14 +72,9 @@ function ArticleLayout() {
     }
   };
 
-  useEffect(() => {
-    fetchArticles();
-    fetchArticleCount();
-  }, []);
-
   const sortArticles = () => {
     const sortedArticles = [...articles].sort((a, b) => {
-      if (sortOrder === "asc") {
+      if (sortOrder === "desc") {
         return (
           new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
         );
@@ -100,7 +104,11 @@ function ArticleLayout() {
             <Button
               colorScheme="warning"
               variant="ghost"
-              leftIcon={<FontAwesomeIcon icon={faSort} />}
+              leftIcon={
+                <FontAwesomeIcon
+                  icon={sortOrder === "desc" ? faSortUp : faSortDown}
+                />
+              }
               onClick={sortArticles}
               width={"40%"}
             >
