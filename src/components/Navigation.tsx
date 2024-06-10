@@ -14,7 +14,6 @@ import {
   faBars,
   faHouse,
   faNewspaper,
-  faStar,
 } from "@fortawesome/free-solid-svg-icons";
 
 function MenuItems() {
@@ -22,9 +21,6 @@ function MenuItems() {
     <>
       <Link href="/" _hover={"none"} color={"blackAlpha.950"}>
         <MenuItem icon={<FontAwesomeIcon icon={faHouse} />}>Home</MenuItem>
-      </Link>
-      <Link href="/wishlist" _hover={"none"} color={"blackAlpha.950"}>
-        <MenuItem icon={<FontAwesomeIcon icon={faStar} />}>Wishlist</MenuItem>
       </Link>
       <Link href="/articles" _hover={"none"} color={"blackAlpha.950"}>
         <MenuItem icon={<FontAwesomeIcon icon={faNewspaper} />}>
