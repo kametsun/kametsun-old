@@ -25,7 +25,6 @@ function Header(): ReactElement {
             <Heading size={"md"}>Welcome to Tsubasa's page!</Heading>
           </Link>
           <Spacer />
-          <Navigation />
         </Flex>
       </Box>
       <Box pt={"calc(4rem + 2px)"} />
